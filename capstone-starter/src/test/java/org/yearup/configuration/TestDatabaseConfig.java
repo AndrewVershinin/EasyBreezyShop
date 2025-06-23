@@ -11,10 +11,7 @@ import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -56,7 +53,7 @@ public class TestDatabaseConfig
     @PreDestroy
     public void cleanup() {
 
-        try(Connection connection = DriverManager.getConnection(serverUrl + "/sys", username, password);
+        try(Connection connection = DriverManager.getConnection(serverUrl, username, password);
             Statement statement = connection.createStatement();
         )
         {
@@ -72,6 +69,7 @@ public class TestDatabaseConfig
     {
         SingleConnectionDataSource dataSource = new SingleConnectionDataSource();
         dataSource.setUrl(String.format("%s/%s", serverUrl, testDb));
+
         dataSource.setUsername(username);
         dataSource.setPassword(password);
         dataSource.setAutoCommit(false);

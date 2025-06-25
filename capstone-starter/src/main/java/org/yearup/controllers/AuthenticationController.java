@@ -24,6 +24,7 @@ import org.yearup.security.jwt.JWTFilter;
 import org.yearup.security.jwt.TokenProvider;
 
 @RestController
+        // CrossOrigin helps to talk my frontend with backend. CORS is enabled
 @CrossOrigin
 @PreAuthorize("permitAll()")
 public class AuthenticationController {
